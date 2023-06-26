@@ -5,121 +5,30 @@ Entrega dia 30/06
 Base já pronta 
 
 
-Alterações funcionando da opção "0" e "1":
+Alterações funcionando da opção "0" e "1": - CAIO
 
- case 0:
-            {
-                do
-                {
-                    printf("\tFabricante:\n");
-                    fgets(fabricantes[i].fabricante, 100, stdin);
+PELO PEDRO
 
-                    printf("\nInforme o nome da marca: ");
-                    fgets(fabricantes[i].nomeM, 100, stdin);
+// Correções realizadas no código:
 
-                    printf("\nInforme o telefone: ");
-                    fgets(fabricantes[i].telefone, 100, stdin);
+1. Renomeação da estrutura 'Marca' para 'Fabricante':
+   - A estrutura 'Marca' foi renomeada para 'Fabricante' em todo o código, garantindo consistência.
 
-                    printf("\nInforme o site: ");
-                    fgets(fabricantes[i].site, 100, stdin);
+2. Atualização das referências à estrutura 'Fabricante':
+   - Todas as referências à estrutura 'Marca' foram atualizadas para 'Fabricante' em todo o código.
+   - Isso inclui as entradas e saídas de dados, como a exibição da lista de marcas/fabricantes.
 
-                    printf("Unidades da Federacao cadastradas:\n");
-                    for (j = 0; j < MAX_UF; j++)
-                    {
-                        printf("%d. %s\n", j + 1, unidadesFederacao[j]);
-                    }
-                    int uf = -1;
-                    printf("Informe o numero correspondente a sua UF: ");
-                    scanf("%d", &uf);
-                    getchar();
+3. Remoção de trechos de código desnecessários:
+   - Foram removidos trechos de código que tratavam a marca e o fabricante como entidades separadas, já que agora utilizamos apenas a estrutura 'Fabricante'.
 
-                    if (uf >= 1 && uf <= MAX_UF)
-                    {
-                        const char *ufEscolhida = unidadesFederacao[uf - 1];
-                        memcpy(fabricantes[i].uf, ufEscolhida, strlen(ufEscolhida));
-                    }
-                    else
-                    {
-                        printf("Opcao invalida.\n");
-                    }
+4. Atualização dos menus e exibições de dados:
+   - Os menus foram atualizados para refletir a mudança de 'Marca' para 'Fabricante'.
+   - As exibições de dados foram atualizadas para utilizar a informação correta do fabricante associado ao produto.
 
-                    printf("\n");
+5. Ajustes nos loops e ordenação dos produtos:
+   - Os loops de ordenação dos produtos foram corrigidos para utilizar a estrutura correta e garantir a ordenação adequada.
+   - Agora os produtos são ordenados com base no 'valor do lucro' e 'percentual de lucro' corretamente.
 
-                    printf("Deseja cadastrar mais um fabricante? (S/N): ");
-                    scanf(" %c", &b);
-                    getchar();
+6. Correção nas mensagens de saída:
+   - As mensagens de saída foram ajustadas para refletir corretamente as informações sobre fabricantes e marcas.
 
-                    i++; // Incrementa o índice do fabricante
-
-                } while (b != 'N' && b != 'n');
-
-                break;
-            }
-
-        case 1:
-            do
-            {
-                printf("\tProduto:\n");
-
-                printf("Informe a descricao do produto: ");
-                scanf(" %[^\n]s", produtos[numProdutos].descricao);
-                while (getchar() != '\n')
-                    ;
-
-                printf("Informe o peso do produto: ");
-                scanf("%f", &produtos[numProdutos].peso);
-                while (getchar() != '\n')
-                    ;
-
-                printf("Informe o valor de compra: ");
-                scanf("%f", &produtos[numProdutos].valorc);
-                while (getchar() != '\n')
-                    ;
-
-                printf("Informe o valor de venda: ");
-                scanf("%f", &produtos[numProdutos].valorv);
-                while (getchar() != '\n')
-                    ;
-
-                printf("Fabricante: ");
-                int fabricanteIndice;
-                while (true)
-                {
-                    scanf("%d", &fabricanteIndice);
-                    while (getchar() != '\n')
-                        ;
-
-                    if (fabricanteIndice >= 0 && fabricanteIndice < MAX_FABRICANTES)
-                    {
-                        produtos[numProdutos].fabricante = fabricantes[fabricanteIndice];
-                        break;
-                    }
-                    else
-                    {
-                        printf("Indice de fabricante invalido. Escreva o indice entre 0 e 1.\n");
-                    }
-                }
-
-                if (produtos[numProdutos].valorc != 0)
-                {
-                    produtos[numProdutos].percentualLucro = (produtos[numProdutos].valorlc / produtos[numProdutos].valorc) * 100;
-                }
-                else
-                {
-                    produtos[numProdutos].percentualLucro = 0;
-                }
-
-                produtos[numProdutos].valorlc = produtos[numProdutos].valorv - produtos[numProdutos].valorc;
-
-                produtos[numProdutos].percentualLucro = (produtos[numProdutos].valorlc / produtos[numProdutos].valorc) * 100;
-
-                printf("\n");
-                numProdutos++; // Incrementa o número de produtos
-
-                printf("Deseja cadastrar mais um produto? (S/N): ");
-                scanf(" %c", &b);
-                while (getchar() != '\n')
-                    ;
-
-            } while (b != 'N' && b != 'n');
-            break;
